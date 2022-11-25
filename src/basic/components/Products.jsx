@@ -1,54 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import useProducts from '../../hooks/use-products';
 
 function Products() {
-  const [products, setProducts] = useState([]);
   const [checked, setChecked] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    fetch(`data/${checked ? 'sale_products.json' : 'products.json'}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('🔥뜨끈한 데이터를 네트워크에서 받아옴');
-        setProducts(data);
-        setIsLoading((prev) => !prev);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading((prev) => !prev);
-      });
-    return () => {
-      console.log('🧹 깨끗하게 청소하는 일들을 합니다.');
-    };
-  }, [checked]);
+  const [isLoading, error, products] = useProducts({ salesOnly: checked });
 
   const handleChange = () => setChecked((prev) => !prev);
 
+  if (isLoading) return <p>Loading...</p>;
+
+  if (error) return <p>{error}</p>;
+
   return (
     <>
-      {isLoading ? (
-        <span>Loading...</span>
-      ) : (
-        <>
-          <input
-            id='checkbox'
-            type='checkbox'
-            value={checked}
-            onChange={handleChange}
-          />
-          <label htmlFor='checkbox'>Show Only 🔥 Sale</label>
-          <ul>
-            {products.map((product) => (
-              <li key={product.id}>
-                <article>
-                  <h3>{product.name}</h3>
-                  <p>{product.price}</p>
-                </article>
-              </li>
-            ))}
-          </ul>
-        </>
-      )}
+      <input
+        id='checkbox'
+        type='checkbox'
+        value={checked}
+        onChange={handleChange}
+      />
+      <label htmlFor='checkbox'>Show Only 🔥 Sale</label>
+      <ul>
+        {products.map((product) => (
+          <li key={product.id}>
+            <article>
+              <h3>{product.name}</h3>
+              <p>{product.price}</p>
+            </article>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
