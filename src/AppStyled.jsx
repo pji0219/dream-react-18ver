@@ -19,11 +19,9 @@ const Button = styled.button`
     `}
 `;
 
-function App() {
+function AppStyled() {
   return (
     <div>
-      <button>button1</button>
-      <button>button2</button>
       <Container>
         <Button>Normal Button</Button>
         <Button primary>Primary Button</Button>
@@ -32,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default AppStyled;
