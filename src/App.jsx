@@ -1,18 +1,16 @@
+import {
+  QueryClient,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
 import React from 'react';
-import AppStyled from './AppStyled';
-import Button1 from './components/Button1';
-import Button2 from './components/Button2';
-import TailwindComponent from './TailwindComponent';
+import './App.css';
+import MainProducts from './components/MainProducts';
 
-function App() {
+export default function App() {
   return (
-    <>
-      <Button1 />
-      <Button2 />
-      <AppStyled />
-      <TailwindComponent />
-    </>
+    <QueryClientProvider>
+      <MainProducts />;
+    </QueryClientProvider>
   );
 }
-
-export default App;
