@@ -6,15 +6,15 @@ const initialPerson = {
   title: '개발자',
   mentors: [
     {
-      name: '연우',
+      name: 'A',
       title: '시니어 개발자',
     },
     {
-      name: '김소현',
+      name: 'B',
       title: '주니어 개발자',
     },
     {
-      name: '김유정',
+      name: 'C',
       title: '주니어 개발자',
     },
   ],
