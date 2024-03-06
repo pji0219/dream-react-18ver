@@ -3,7 +3,7 @@ import useProducts from '../../deep2/hooks/use-products';
 
 function Products() {
   const [checked, setChecked] = useState(false);
-  const [isLoading, error, products] = useProducts({ salesOnly: checked });
+  const [isLoading, error, products] = useProducts(checked);
 
   const handleChange = () => setChecked((prev) => !prev);
 
@@ -17,6 +17,7 @@ function Products() {
         id='checkbox'
         type='checkbox'
         value={checked}
+        checked={checked}
         onChange={handleChange}
       />
       <label htmlFor='checkbox'>Show Only 🔥 Sale</label>
